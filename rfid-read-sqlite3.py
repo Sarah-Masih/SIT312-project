@@ -3,7 +3,8 @@ from mfrc522 import SimpleMFRC522
 import requests
 import time
 import os
-import sqlite3
+import sqlite3 # Install mysql-connector-python BELOW!!
+# pip install mysql-connector-python
 from datetime import datetime
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -11,7 +12,10 @@ red = 37
 green = 36
 GPIO.setup(green, GPIO.OUT)
 GPIO.setup(red, GPIO.OUT)
-connection = sqlite3.connect('datalogger.db')
+# Changing the connection from local sqlite3 database
+# connection = sqlite3.connect('datalogger.db')
+connection = mysql.connector.connect(host='rfidcheckin.cljhbnnuplh1.ap-southeast-2.rds.amazonaws.com',database='rfidDB',user='admin',password='PASSWORD HERE')
+
 cursor = connection.cursor()
 
 #get data from rfid as well as serial number
